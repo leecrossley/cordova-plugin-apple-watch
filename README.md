@@ -22,11 +22,12 @@ Initialises the Apple Watch interface, this must be called and the success handl
 applewatch.init(successHandler, errorHandler);
 ```
 
-The apps bundleId will be used for identification by default, or you can supply your own Application Group Id with the optional `groupId` argument:
+The app bundleId will be used for identification by default, prefixed by "group.".
 
+You can supply your own Application Group Id with the optional `appGroupId` argument, this should be in the format "group.com.company.app":
 
 ```js
-applewatch.init(successHandler, errorHandler, groupId);
+applewatch.init(successHandler, errorHandler, appGroupId);
 ```
 
 ### sendMessage
@@ -46,7 +47,7 @@ Handles a message object received on a specific queue (must be called after succ
 Used to handle strings or json objects received from the Apple Watch extension.
 
 ```js
-applewatch.sendMessage(onMessageReceived, queueName);
+applewatch.handleMessage(messageHandler, queueName);
 ```
 
 ## Platforms

@@ -12,4 +12,6 @@
 
 - (void) sendMessage:(CDVInvokedUrlCommand*)command;
 
+- (void) handleMessage:(CDVInvokedUrlCommand*)command;
+
 @end

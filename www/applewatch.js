@@ -5,9 +5,9 @@ var AppleWatch = function () {
     this.name = "AppleWatch";
 };
 
-AppleWatch.prototype.init = function (onSuccess, onError, groupId) {
+AppleWatch.prototype.init = function (onSuccess, onError, appGroupId) {
     exec(onSuccess, onError, "AppleWatch", "sendMessage", [{
-        "groupId": groupId
+        "appGroupId": appGroupId
     }]);
 };
 
@@ -25,8 +25,10 @@ AppleWatch.prototype.sendMessage = function (onSuccess, onError, queueName, mess
     }]);
 };
 
-AppleWatch.prototype.handleMessage = function (onMessageReceived, queueName) {
-    exec(onMessageReceived, null, "AppleWatch", "handleMessage", [{
+AppleWatch.prototype.handleMessage = function (onMessage, queueName) {
+    queueName = message || "default";
+
+    exec(onMessage, null, "AppleWatch", "handleMessage", [{
         "queueName": queueName
     }]);
 };
