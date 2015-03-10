@@ -35,7 +35,7 @@ Sends a message object to a specific queue (must be called after successful init
 Used to send strings or json objects to the Apple Watch extension.
 
 ```js
-applewatch.sendMessage(successHandler, errorHandler, message, queueName);
+applewatch.sendMessage(message, queueName, successHandler, errorHandler);
 ```
 
 ### handleMessage
@@ -55,21 +55,15 @@ Basic example to send a message "test" to the "default" queue and get handled.
 This example is iPhone -> iPhone.
 
 ```
-var onMessageReceived = function (message) {
-    alert("Message received: " + message);
-};
-
-var onInit = function (appGroupId) {
+applewatch.init(function (appGroupId) {
     alert(appGroupId);
 
-    applewatch.handleMessage(onMessageReceived);
+    applewatch.handleMessage(function(message) {
+        alert("Message received: " + message);
+    });
 
-    setTimeout(function() {
-        applewatch.sendMessage(null, null, "test");
-    }, 1000)
-};
-
-applewatch.init(onInit);
+    applewatch.sendMessage("test");
+});
 ```
 
 ## Platforms

@@ -11,7 +11,7 @@ AppleWatch.prototype.init = function (onSuccess, onError, appGroupId) {
     }]);
 };
 
-AppleWatch.prototype.sendMessage = function (onSuccess, onError, message, queueName) {
+AppleWatch.prototype.sendMessage = function (message, queueName, onSuccess, onError) {
     queueName = queueName || "default";
     message = message || "";
 
