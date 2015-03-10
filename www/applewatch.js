@@ -6,7 +6,7 @@ var AppleWatch = function () {
 };
 
 AppleWatch.prototype.init = function (onSuccess, onError, appGroupId) {
-    exec(onSuccess, onError, "AppleWatch", "sendMessage", [{
+    exec(onSuccess, onError, "AppleWatch", "init", [{
         "appGroupId": appGroupId
     }]);
 };
