@@ -6,11 +6,10 @@
 #import "Cordova/CDV.h"
 #import "Cordova/CDVViewController.h"
 #import "AppleWatch.h"
-
-static NSString * const AppleWatchNotification = @"AppleWatchNotification";
+#import "MMWormhole.h"
 
 @interface AppleWatch ()
-    @property (nonatomic, strong) NSString *appGroupId;
+    @property (nonatomic, strong) MMWormhole* wormhole;
 @end
 
 @implementation AppleWatch
@@ -31,11 +30,7 @@ static NSString * const AppleWatchNotification = @"AppleWatchNotification";
     {
         if ([[NSFileManager defaultManager] respondsToSelector:@selector(containerURLForSecurityApplicationGroupIdentifier:)])
         {
-            self.appGroupId = appGroupId;
-
-            [[NSNotificationCenter defaultCenter] addObserver:self
-                selector:@selector(receiveMessage:) name:AppleWatchNotification object:nil];
-
+            wormhole = [[MMWormhole alloc] initWithApplicationGroupIdentifier:appGroupId];
             pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
         }
         else
@@ -55,32 +50,19 @@ static NSString * const AppleWatchNotification = @"AppleWatchNotification";
 
 - (void) sendMessage:(CDVInvokedUrlCommand*)command;
 {
-    CDVPluginResult* pluginResult = nil;
-
     NSMutableDictionary *args = [command.arguments objectAtIndex:0];
+    
     NSString *queueName = [args objectForKey:@"queueName"];
-    NSData *message = [NSKeyedArchiver archivedDataWithRootObject:[args objectForKey:@"message"]];
+    NSString *message = [args objectForKey:@"message"];
 
-    CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
-    [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+    [wormhole passMessageObject:message identifier:queueName];
+
+    [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_OK] callbackId:command.callbackId];
 }
 
 - (void) receiveMessage:(NSNotification*)notification;
 {
 
-}
-
-- (NSString*) queuePath:(NSString*)queueName
-{
-    if (identifier == nil || identifier.length == 0) {
-        return nil;
-    }
-
-    NSString *directoryPath = [self messagePassingDirectoryPath];
-    NSString *fileName = [NSString stringWithFormat:@"%@.archive", identifier];
-    NSString *filePath = [directoryPath stringByAppendingPathComponent:fileName];
-
-    return filePath;
 }
 
 @end

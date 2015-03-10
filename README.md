@@ -52,7 +52,7 @@ applewatch.handleMessage(messageHandler, queueName);
 
 ## Platforms
 
-iOS 7+ only.
+iOS 8.2+ only.
 
 ## License
 

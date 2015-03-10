@@ -9,9 +9,7 @@
 @interface AppleWatch : CDVPlugin
 
 - (void) init:(CDVInvokedUrlCommand*)command;
-
 - (void) sendMessage:(CDVInvokedUrlCommand*)command;
-
 - (void) handleMessage:(CDVInvokedUrlCommand*)command;
 
 @end
