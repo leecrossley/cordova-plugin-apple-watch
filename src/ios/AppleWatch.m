@@ -51,7 +51,7 @@
 - (void) sendMessage:(CDVInvokedUrlCommand*)command;
 {
     NSMutableDictionary *args = [command.arguments objectAtIndex:0];
-    
+
     NSString *queueName = [args objectForKey:@"queueName"];
     NSString *message = [args objectForKey:@"message"];
 
@@ -60,9 +60,17 @@
     [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_OK] callbackId:command.callbackId];
 }
 
-- (void) receiveMessage:(NSNotification*)notification;
+- (void) handleMessage:(CDVInvokedUrlCommand*)command;
 {
+    NSMutableDictionary *args = [command.arguments objectAtIndex:0];
+    NSString *queueName = [args objectForKey:@"queueName"];
 
+    [wormhole listenForMessageWithIdentifier:queueName listener:^(id message) {
+        CDVPluginResult* result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:message];
+        [result setKeepCallbackAsBool:YES];
+
+        [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+    }];
 }
 
 @end
