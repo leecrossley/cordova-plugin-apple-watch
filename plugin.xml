@@ -1,9 +1,9 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<plugin id="uk.co.ilee.applewatch" version="0.0.2-dev" xmlns="http://apache.org/cordova/ns/plugins/1.0">
+<plugin id="uk.co.ilee.applewatch" version="0.0.3" xmlns="http://apache.org/cordova/ns/plugins/1.0">
     <name>Apple Watch</name>
     <author>Lee Crossley (http://ilee.co.uk/)</author>
     <description>Cordova / PhoneGap Plugin for the Apple Watch (WatchKit) to allow json object
-        message passing over defined channels from a Cordova app to Apple Watch. </description>
+        message passing over defined or default queues from a Cordova app to Apple Watch.</description>
     <keywords>cordova, apple, watch, watchkit, channel, json, message, extension</keywords>
     <license>MIT</license>
     <engines>

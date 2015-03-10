@@ -1,8 +1,6 @@
 ## Apple Watch Plugin for Apache Cordova
 
-**Not ready for production use, work in progress**
-
-If you're interested in this plugin, please [contact me](http://ilee.co.uk/contact-me/).
+**Cordova / PhoneGap Plugin for the Apple Watch (WatchKit) to allow json object message passing over defined or default queues from a Cordova app to Apple Watch.**
 
 ## Install
 

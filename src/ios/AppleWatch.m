@@ -28,24 +28,9 @@
         appGroupId = [NSString stringWithFormat:@"group.%@", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleIdentifier"]];
     }
 
-    if ([appGroupId length] != 0)
-    {
-        if ([[NSFileManager defaultManager] respondsToSelector:@selector(containerURLForSecurityApplicationGroupIdentifier:)])
-        {
-            self.wormhole = [[MMWormhole alloc] initWithApplicationGroupIdentifier:appGroupId optionalDirectory:nil];
-            pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:appGroupId];
-        }
-        else
-        {
-            pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR
-                messageAsString:@"Feature not available on this device, only iOS 7+ is supported"];
-        }
-    }
-    else
-    {
-        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR
-            messageAsString:@"Please specify `appGroupId`, unable to determine bundle identifier"];
-    }
+    self.wormhole = [[MMWormhole alloc] initWithApplicationGroupIdentifier:appGroupId optionalDirectory:nil];
+
+    pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:appGroupId];
 
     [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
 }
