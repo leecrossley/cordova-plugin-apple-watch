@@ -50,6 +50,30 @@ Used to handle strings or json objects received from the Apple Watch extension.
 applewatch.handleMessage(messageHandler, queueName);
 ```
 
+## Example
+
+Basic example to send a message "test" to the "default" queue and get handled.
+
+This example is iPhone -> iPhone.
+
+```
+var onMessageReceived = function (message) {
+    alert("Message received: " + message);
+};
+
+var onInit = function (appGroupId) {
+    alert(appGroupId);
+
+    applewatch.handleMessage(onMessageReceived);
+
+    setTimeout(function() {
+        applewatch.sendMessage(null, null, "test");
+    }, 1000)
+};
+
+applewatch.init(onInit);
+```
+
 ## Platforms
 
 iOS 8.2+ only.

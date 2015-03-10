@@ -175,7 +175,7 @@ class CocoapodToCordovaBuilder
     out_name ||= 'plugin.xml'
     File.open(File.join(root_path, out_name), 'w') do |file|
       plugin_xml.context[:attribute_quote] = :quote
-      plugin_xml.write(file, 2)
+      plugin_xml.write(file)
     end
   end
 
