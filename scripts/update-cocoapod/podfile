@@ -1,0 +1,15 @@
+platform :ios, '8.2'
+pod 'MMWormhole', git: 'git://github.com/mutualmobile/MMWormhole.git'
+
+post_install do |installer|
+  require './cocoapod-to-cordova'
+  build = CocoapodToCordovaBuilder.new('MMWormhole', installer.project)
+  build.configure({
+    product: { name: 'libmmwormhole.a' },
+    localization: 'en',
+    headers: {
+      exclude: []
+    }
+  })
+  build.update_plugin!
+end
