@@ -1,25 +1,39 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0" id="uk.co.ilee.applewatch" version="0.0.0-dev">
-    <name>Apple Watch</name>
-    <author>Lee Crossley (http://ilee.co.uk/)</author>
-    <description>Cordova / PhoneGap Plugin for the Apple Watch (WatchKit) to allow
-        json object message passing over defined channels from a Cordova app to Apple Watch.</description>
-    <keywords>cordova, apple, watch, watchkit, channel, json, message, extension</keywords>
-    <license>MIT</license>
-    <engines>
-        <engine name="cordova" version=">=3.0.0" />
-    </engines>
-    <js-module src="www/applewatch.js" name="AppleWatch">
-        <clobbers target="applewatch" />
-    </js-module>
-    <platform name="ios">
-        <config-file target="config.xml" parent="/*">
-            <feature name="AppleWatch">
-                <param name="ios-package" value="AppleWatch" />
-                <param name="onload" value="true" />
-            </feature>
-        </config-file>
-        <header-file src="src/ios/AppleWatch.h" />
-        <source-file src="src/ios/AppleWatch.m" />
-    </platform>
+<?xml version='1.0' encoding='UTF-8'?> 
+<plugin xmlns='http://apache.org/cordova/ns/plugins/1.0' id='uk.co.ilee.applewatch' version='0.0.0-dev'>
+  <name>
+     Apple Watch 
+  </name>
+  <author>
+     Lee Crossley (http://ilee.co.uk/) 
+  </author>
+  <description>
+     Cordova / PhoneGap Plugin for the Apple Watch (WatchKit) to allow json
+    object message passing over defined channels from a Cordova app to Apple
+    Watch. 
+  </description>
+  <keywords>
+     cordova, apple, watch, watchkit, channel, json, message, extension 
+  </keywords>
+  <license>
+     MIT 
+  </license>
+  <engines>
+    <engine name='cordova' version='>=3.0.0'/>
+  </engines>
+  <js-module src='www/applewatch.js' name='AppleWatch'>
+    <clobbers target='applewatch'/>
+  </js-module>
+  <platform name='ios'>
+    <config-file target='config.xml' parent='/*'>
+      <feature name='AppleWatch'>
+        <param name='ios-package' value='AppleWatch'/>
+        <param name='onload' value='true'/>
+      </feature>
+    </config-file>
+    <header-file src='src/ios/AppleWatch.h'/>
+    <source-file src='src/ios/AppleWatch.m'/>
+    <framework src='Foundation.framework' autogen='true'/>
+    <header-file src='src/ios/vendor/headers/MMWormhole.h' autogen='true'/>
+    <source-file framework='true' src='src/ios/vendor/libmmwormhole.a' autogen='true'/>
+  </platform>
 </plugin>

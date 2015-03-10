@@ -55,6 +55,12 @@ static NSString * const AppleWatchNotification = @"AppleWatchNotification";
 
 - (void) sendMessage:(CDVInvokedUrlCommand*)command;
 {
+    CDVPluginResult* pluginResult = nil;
+
+    NSMutableDictionary *args = [command.arguments objectAtIndex:0];
+    NSString *queueName = [args objectForKey:@"queueName"];
+    NSData *message = [NSKeyedArchiver archivedDataWithRootObject:[args objectForKey:@"message"]];
+
     CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
     [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
 }
@@ -62,6 +68,19 @@ static NSString * const AppleWatchNotification = @"AppleWatchNotification";
 - (void) receiveMessage:(NSNotification*)notification;
 {
 
+}
+
+- (NSString*) queuePath:(NSString*)queueName
+{
+    if (identifier == nil || identifier.length == 0) {
+        return nil;
+    }
+
+    NSString *directoryPath = [self messagePassingDirectoryPath];
+    NSString *fileName = [NSString stringWithFormat:@"%@.archive", identifier];
+    NSString *filePath = [directoryPath stringByAppendingPathComponent:fileName];
+
+    return filePath;
 }
 
 @end
