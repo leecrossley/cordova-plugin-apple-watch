@@ -8,9 +8,13 @@
 #import "AppleWatch.h"
 #import "MMWormhole.h"
 
-@implementation AppleWatch
+@interface AppleWatch ()
 
-MMWormhole* wormhole;
+@property (nonatomic, strong) MMWormhole* wormhole;
+
+@end
+
+@implementation AppleWatch
 
 - (void) init:(CDVInvokedUrlCommand*)command;
 {
@@ -28,7 +32,7 @@ MMWormhole* wormhole;
     {
         if ([[NSFileManager defaultManager] respondsToSelector:@selector(containerURLForSecurityApplicationGroupIdentifier:)])
         {
-            wormhole = [[MMWormhole alloc] initWithApplicationGroupIdentifier:appGroupId optionalDirectory:@"watch"];
+            self.wormhole = [[MMWormhole alloc] initWithApplicationGroupIdentifier:appGroupId optionalDirectory:nil];
             pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:appGroupId];
         }
         else
@@ -53,7 +57,7 @@ MMWormhole* wormhole;
     NSString *queueName = [args objectForKey:@"queueName"];
     NSString *message = [args objectForKey:@"message"];
 
-    [wormhole passMessageObject:message identifier:queueName];
+    [self.wormhole passMessageObject:message identifier:queueName];
 
     [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_OK] callbackId:command.callbackId];
 }
@@ -63,7 +67,7 @@ MMWormhole* wormhole;
     NSMutableDictionary *args = [command.arguments objectAtIndex:0];
     NSString *queueName = [args objectForKey:@"queueName"];
 
-    [wormhole listenForMessageWithIdentifier:queueName listener:^(id message) {
+    [self.wormhole listenForMessageWithIdentifier:queueName listener:^(id message) {
         CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:message];
         [pluginResult setKeepCallbackAsBool:YES];
 

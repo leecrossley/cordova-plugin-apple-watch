@@ -37,7 +37,7 @@ Sends a message object to a specific queue (must be called after successful init
 Used to send strings or json objects to the Apple Watch extension.
 
 ```js
-applewatch.sendMessage(successHandler, errorHandler, queueName, message);
+applewatch.sendMessage(successHandler, errorHandler, message, queueName);
 ```
 
 ### handleMessage
