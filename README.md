@@ -19,10 +19,10 @@ You **do not** need to reference any JavaScript, the Cordova plugin architecture
 Initialises the Apple Watch interface, this must be called and the success handler fired before messages can be sent.
 
 ```js
-applewatch.init(successHandler, errorHandler);
+applewatch.init(function successHandler(appGroupId) {}, errorHandler);
 ```
 
-The app bundleId will be used for identification by default, prefixed by "group.".
+The `successHandler` is called with one arg `appGroupId` that was used in initialisation. The app bundleId will be used for identification by default, prefixed by "group.".
 
 You can supply your own Application Group Id with the optional `appGroupId` argument, this should be in the format "group.com.company.app":
 
