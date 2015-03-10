@@ -29,7 +29,7 @@ MMWormhole* wormhole;
         if ([[NSFileManager defaultManager] respondsToSelector:@selector(containerURLForSecurityApplicationGroupIdentifier:)])
         {
             wormhole = [[MMWormhole alloc] initWithApplicationGroupIdentifier:appGroupId optionalDirectory:@""];
-            pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
+            pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:appGroupId];
         }
         else
         {
