@@ -12,6 +12,8 @@ You **do not** need to reference any JavaScript, the Cordova plugin architecture
 
 ## Usage
 
+Generally speaking, some success and error handlers may be omitted. This is catered for in the interface function argument orders.
+
 ### init
 
 Initialises the Apple Watch interface, this must be called and the success handler fired before messages can be sent.
@@ -32,7 +34,7 @@ applewatch.init(successHandler, errorHandler, appGroupId);
 
 Sends a message object to a specific queue (must be called after successful init).
 
-Used to send strings or json objects to the Apple Watch extension.
+Used to send strings or json objects to the Apple Watch extension. Json objects are automatically stringified.
 
 ```js
 applewatch.sendMessage(message, queueName, successHandler, errorHandler);
@@ -40,12 +42,36 @@ applewatch.sendMessage(message, queueName, successHandler, errorHandler);
 
 ### addListener
 
-Handles a message object received on a specific queue (must be called after successful init).
+Adds a listener to handle a message object received on a specific queue (must be called after successful init).
 
-Used to handle strings or json objects received from the Apple Watch extension.
+Used to handle strings or json objects received from the Apple Watch extension. Json objects are automatically parsed.
 
 ```js
 applewatch.addListener(messageHandler, queueName);
+```
+
+### removeListener
+
+Removes a listener for a specific queue.
+
+```js
+applewatch.removeListener(queueName, successHandler, errorHandler);
+```
+
+### purgeQueue
+
+**Use with caution**: removes all messages on a queue.
+
+```js
+applewatch.purgeQueue(queueName, successHandler, errorHandler);
+```
+
+### purgeAllQueues
+
+**Use with extreme caution**: removes all messages on all queues.
+
+```js
+applewatch.purgeAllQueues(successHandler, errorHandler);
 ```
 
 ## Example
