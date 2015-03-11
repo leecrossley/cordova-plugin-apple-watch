@@ -70,4 +70,21 @@
     [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_OK] callbackId:command.callbackId];
 }
 
+- (void) purgeQueue:(CDVInvokedUrlCommand*)command;
+{
+    NSMutableDictionary *args = [command.arguments objectAtIndex:0];
+    NSString *queueName = [args objectForKey:@"queueName"];
+
+    [self.wormhole clearMessageContentsForIdentifier:queueName];
+
+    [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_OK] callbackId:command.callbackId];
+}
+
+- (void) purgeAllQueues:(CDVInvokedUrlCommand*)command;
+{
+    [self.wormhole clearAllMessageContents];
+
+    [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_OK] callbackId:command.callbackId];
+}
+
 @end

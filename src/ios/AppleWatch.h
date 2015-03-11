@@ -12,5 +12,7 @@
 - (void) sendMessage:(CDVInvokedUrlCommand*)command;
 - (void) addListener:(CDVInvokedUrlCommand*)command;
 - (void) removeListener:(CDVInvokedUrlCommand*)command;
+- (void) purgeQueue:(CDVInvokedUrlCommand*)command;
+- (void) purgeAllQueues:(CDVInvokedUrlCommand*)command;
 
 @end

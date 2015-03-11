@@ -39,4 +39,14 @@ AppleWatch.prototype.removeListener = function (queueName, onSuccess, onError) {
     }]);
 };
 
+AppleWatch.prototype.purgeQueue = function (queueName, onSuccess, onError) {
+    exec(onSuccess, onError, "AppleWatch", "purgeQueue", [{
+        "queueName": queueName
+    }]);
+};
+
+AppleWatch.prototype.purgeAllQueues = function (onSuccess, onError) {
+    exec(onSuccess, onError, "AppleWatch", "purgeAllQueues", []);
+};
+
 module.exports = new AppleWatch();
