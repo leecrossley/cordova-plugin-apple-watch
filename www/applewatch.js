@@ -12,9 +12,6 @@ AppleWatch.prototype.init = function (onSuccess, onError, appGroupId) {
 };
 
 AppleWatch.prototype.sendMessage = function (message, queueName, onSuccess, onError) {
-    queueName = queueName || "default";
-    message = message || "";
-
     if (typeof(message) === "object") {
         message = JSON.stringify(message);
     }
@@ -25,15 +22,13 @@ AppleWatch.prototype.sendMessage = function (message, queueName, onSuccess, onEr
     }]);
 };
 
-AppleWatch.prototype.handleMessage = function (onMessage, queueName) {
-    queueName = queueName || "default";
-
+AppleWatch.prototype.addListener = function (queueName, onMessage) {
     var wrappedOnMessage = function (message) {
         try { message = JSON.parse(message); } catch (e) {}
         onMessage(message);
     };
 
-    exec(wrappedOnMessage, null, "AppleWatch", "handleMessage", [{
+    exec(wrappedOnMessage, null, "AppleWatch", "addListener", [{
         "queueName": queueName
     }]);
 };

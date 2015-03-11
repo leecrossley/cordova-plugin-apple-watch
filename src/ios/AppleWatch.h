@@ -10,6 +10,6 @@
 
 - (void) init:(CDVInvokedUrlCommand*)command;
 - (void) sendMessage:(CDVInvokedUrlCommand*)command;
-- (void) handleMessage:(CDVInvokedUrlCommand*)command;
+- (void) addListener:(CDVInvokedUrlCommand*)command;
 
 @end

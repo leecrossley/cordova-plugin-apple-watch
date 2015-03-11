@@ -47,7 +47,7 @@
     [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_OK] callbackId:command.callbackId];
 }
 
-- (void) handleMessage:(CDVInvokedUrlCommand*)command;
+- (void) addListener:(CDVInvokedUrlCommand*)command;
 {
     NSMutableDictionary *args = [command.arguments objectAtIndex:0];
     NSString *queueName = [args objectForKey:@"queueName"];

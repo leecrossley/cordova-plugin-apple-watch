@@ -38,19 +38,19 @@ Used to send strings or json objects to the Apple Watch extension.
 applewatch.sendMessage(message, queueName, successHandler, errorHandler);
 ```
 
-### handleMessage
+### addListener
 
 Handles a message object received on a specific queue (must be called after successful init).
 
 Used to handle strings or json objects received from the Apple Watch extension.
 
 ```js
-applewatch.handleMessage(messageHandler, queueName);
+applewatch.addListener(messageHandler, queueName);
 ```
 
 ## Example
 
-Basic example to send a message "test" to the "default" queue and get handled.
+Basic example to send a message "test" to the "myqueue" queue and get handled.
 
 This example is iPhone -> iPhone.
 
@@ -58,11 +58,11 @@ This example is iPhone -> iPhone.
 applewatch.init(function (appGroupId) {
     alert(appGroupId);
 
-    applewatch.handleMessage(function(message) {
+    applewatch.addListener("myqueue", function(message) {
         alert("Message received: " + message);
     });
 
-    applewatch.sendMessage("test");
+    applewatch.sendMessage("test", "myqueue");
 });
 ```
 
