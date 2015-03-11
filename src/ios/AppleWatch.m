@@ -60,4 +60,14 @@
     }];
 }
 
+- (void) removeListener:(CDVInvokedUrlCommand*)command;
+{
+    NSMutableDictionary *args = [command.arguments objectAtIndex:0];
+    NSString *queueName = [args objectForKey:@"queueName"];
+
+    [self.wormhole stopListeningForMessageWithIdentifier:queueName];
+
+    [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_OK] callbackId:command.callbackId];
+}
+
 @end

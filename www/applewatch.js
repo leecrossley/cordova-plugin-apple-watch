@@ -33,4 +33,10 @@ AppleWatch.prototype.addListener = function (queueName, onMessage) {
     }]);
 };
 
+AppleWatch.prototype.removeListener = function (queueName, onSuccess, onError) {
+    exec(onSuccess, onError, "AppleWatch", "removeListener", [{
+        "queueName": queueName
+    }]);
+};
+
 module.exports = new AppleWatch();
