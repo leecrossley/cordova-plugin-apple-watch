@@ -15,7 +15,7 @@ AppleWatch.prototype.sendMessage = function (message, queueName, onSuccess, onEr
     queueName = queueName || "default";
     message = message || "";
 
-    if (typeof(message) !== "object") {
+    if (typeof(message) === "object") {
         message = JSON.stringify(message);
     }
 
