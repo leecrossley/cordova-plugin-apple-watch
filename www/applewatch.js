@@ -28,7 +28,12 @@ AppleWatch.prototype.sendMessage = function (message, queueName, onSuccess, onEr
 AppleWatch.prototype.handleMessage = function (onMessage, queueName) {
     queueName = queueName || "default";
 
-    exec(onMessage, null, "AppleWatch", "handleMessage", [{
+    var wrappedOnMessage = function (message) {
+        try { message = JSON.parse(message); } catch (e) {}
+        onMessage(message);
+    };
+
+    exec(wrappedOnMessage, null, "AppleWatch", "handleMessage", [{
         "queueName": queueName
     }]);
 };
