@@ -6,6 +6,8 @@ Simplified overarching diagram:
 
 <img align="center" src="https://raw.githubusercontent.com/leecrossley/cordova-plugin-apple-watch/master/apple-watch-plugin.png">
 
+You will need to write your own WatchKit Extension and WatchKit App with native code. It will not be possible to run a Cordova app directly on the Watch, as there is no support for a WebView and your WatchKit code must reside in the WatchKit Extension. This plugin provides a message passing interface between your Cordova iPhone app and the WatchKit Extension / App.
+
 ## Install
 
 ```
