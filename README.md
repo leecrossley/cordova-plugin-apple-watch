@@ -53,7 +53,7 @@ Adds a listener to handle a message object received on a specific queue (must be
 Used to handle strings or json objects received from the Apple Watch extension. Json objects are automatically parsed.
 
 ```js
-applewatch.addListener(messageHandler, queueName);
+applewatch.addListener(queueName, messageHandler);
 ```
 
 ### removeListener
