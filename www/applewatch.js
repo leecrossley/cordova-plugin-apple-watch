@@ -22,6 +22,10 @@ AppleWatch.prototype.sendMessage = function (message, queueName, onSuccess, onEr
     }]);
 };
 
+AppleWatch.prototype.sendNotification = function (onSuccess, onError, notification) {
+    exec(onSuccess, onError, "AppleWatch", "sendNotification", [notification]);
+};
+
 AppleWatch.prototype.addListener = function (queueName, onMessage) {
     var wrappedOnMessage = function (message) {
         try { message = JSON.parse(message); } catch (e) {}
