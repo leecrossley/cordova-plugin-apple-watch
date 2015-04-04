@@ -46,6 +46,28 @@ Used to send strings or json objects to the Apple Watch extension. Json objects 
 applewatch.sendMessage(message, queueName, successHandler, errorHandler);
 ```
 
+### sendNotification
+
+Sends a local notification directly to the apple watch.
+
+Used to display the apple watch short-look / long-look notification interface, using UILocalNotification. If the user continues to look at the notification, the system transitions quickly from the short-look interface to the long-look interface.
+
+```js
+var payload = {
+    "title": "Short!",
+    "body": "Shown in the long-look interface to provide more detail",
+    "bagde": 1
+};
+
+applewatch.sendNotification(successHandler, errorHandler, payload);
+```
+
+- *title* - shown in the short-look interface as a brief indication of the intent of the notification
+- *body* - shown in the long-look interface to provide more detail
+- *badge* - app icon badge number
+
+NB: This notification will also appear on the iPhone if the app is running in a background mode.
+
 ### addListener
 
 Adds a listener to handle a message object received on a specific queue (must be called after successful init).
