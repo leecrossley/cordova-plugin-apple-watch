@@ -103,7 +103,7 @@ Used to display the apple watch short-look / long-look notification interface, u
 var payload = {
     "title": "Short!",
     "body": "Shown in the long-look interface to provide more detail",
-    "bagde": 1
+    "badge": 1
 };
 
 applewatch.sendNotification(successHandler, errorHandler, payload);
