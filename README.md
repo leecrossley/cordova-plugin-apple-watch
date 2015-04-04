@@ -16,7 +16,7 @@ cordova plugin add https://github.com/leecrossley/cordova-plugin-apple-watch.git
 
 You **do not** need to reference any JavaScript, the Cordova plugin architecture will add a `applewatch` object to your root automatically when you build.
 
-## Usage
+## Message passing
 
 Generally speaking, some success and error handlers may be omitted. This is catered for in the interface function argument orders.
 
@@ -36,17 +36,6 @@ You can supply your own Application Group Id with the optional `appGroupId` argu
 applewatch.init(successHandler, errorHandler, appGroupId);
 ```
 
-### registerNotifications
-
-Requests permission for local notifications if you want to utilise the short-look / long-look notification interface. This must be called and the success handler fired before `sendNotification` will work correctly.
-
-```js
-applewatch.registerNotifications(successHandler, errorHandler);
-```
-
-- successHandler is called with **true** if the permission was accepted
-- errorHandler is called with **false** if the permission was rejected
-
 ### sendMessage
 
 Sends a message object to a specific queue (must be called after successful init).
@@ -56,28 +45,6 @@ Used to send strings or json objects to the Apple Watch extension. Json objects 
 ```js
 applewatch.sendMessage(message, queueName, successHandler, errorHandler);
 ```
-
-### sendNotification
-
-Sends a local notification directly to the apple watch (should be called after successful registerNotifications).
-
-Used to display the apple watch short-look / long-look notification interface, using UILocalNotification. If the user continues to look at the notification, the system transitions quickly from the short-look interface to the long-look interface.
-
-```js
-var payload = {
-    "title": "Short!",
-    "body": "Shown in the long-look interface to provide more detail",
-    "bagde": 1
-};
-
-applewatch.sendNotification(successHandler, errorHandler, payload);
-```
-
-- *title* - shown in the short-look interface as a brief indication of the intent of the notification
-- *body* - shown in the long-look interface to provide more detail
-- *badge* - app icon badge number
-
-NB: This notification will also appear on the iPhone if the app is running in a background mode.
 
 ### addListener
 
@@ -113,7 +80,42 @@ applewatch.purgeQueue(queueName, successHandler, errorHandler);
 applewatch.purgeAllQueues(successHandler, errorHandler);
 ```
 
-## Example
+## Notifications
+
+### registerNotifications
+
+Requests permission for local notifications if you want to utilise the short-look / long-look notification interface. This must be called and the success handler fired before `sendNotification` will work correctly.
+
+```js
+applewatch.registerNotifications(successHandler, errorHandler);
+```
+
+- successHandler is called with **true** if the permission was accepted
+- errorHandler is called with **false** if the permission was rejected
+
+### sendNotification
+
+Sends a local notification directly to the apple watch (should be called after successful registerNotifications).
+
+Used to display the apple watch short-look / long-look notification interface, using UILocalNotification. If the user continues to look at the notification, the system transitions quickly from the short-look interface to the long-look interface.
+
+```js
+var payload = {
+    "title": "Short!",
+    "body": "Shown in the long-look interface to provide more detail",
+    "bagde": 1
+};
+
+applewatch.sendNotification(successHandler, errorHandler, payload);
+```
+
+- *title* - shown in the short-look interface as a brief indication of the intent of the notification
+- *body* - shown in the long-look interface to provide more detail
+- *badge* - app icon badge number
+
+NB: This notification will also appear on the iPhone if the app is running in a background mode.
+
+## Basic message passing example
 
 Basic example to send a message "test" to the "myqueue" queue and get handled.
 
