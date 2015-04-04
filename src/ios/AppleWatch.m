@@ -47,6 +47,23 @@
     [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_OK] callbackId:command.callbackId];
 }
 
+- (void) sendNotification:(CDVInvokedUrlCommand*)command;
+{
+    NSMutableDictionary *args = [command.arguments objectAtIndex:0];
+
+    UILocalNotification *localNotification = [[UILocalNotification alloc] init];
+
+    localNotification.alertTitle = [args objectForKey:@"title"];
+    localNotification.alertBody = [args objectForKey:@"body"];
+    localNotification.applicationIconBadgeNumber = [[args objectForKey:@"badge"] intValue];
+
+    localNotification.fireDate = [NSDate date];
+
+    [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
+
+    [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_OK] callbackId:command.callbackId];
+}
+
 - (void) addListener:(CDVInvokedUrlCommand*)command;
 {
     NSMutableDictionary *args = [command.arguments objectAtIndex:0];
