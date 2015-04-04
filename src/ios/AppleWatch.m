@@ -37,11 +37,22 @@
 
 - (void) registerNotifications:(CDVInvokedUrlCommand*)command;
 {
+    CDVPluginResult* pluginResult = nil;
+
     UIUserNotificationType types = UIUserNotificationTypeBadge | UIUserNotificationTypeSound | UIUserNotificationTypeAlert;
     UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:types categories:nil];
     [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
 
-    [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_OK] callbackId:command.callbackId];
+    if ([[UIApplication sharedApplication] hasPermissionToScheduleLocalNotifications])
+    {
+        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsBool:(true)];
+    }
+    else
+    {
+        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsBool:(false)];
+    }
+
+    [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
 }
 
 - (void) sendMessage:(CDVInvokedUrlCommand*)command;
@@ -67,6 +78,7 @@
     localNotification.applicationIconBadgeNumber = [[args objectForKey:@"badge"] intValue];
 
     localNotification.fireDate = [NSDate date];
+    notification.soundName = UILocalNotificationDefaultSoundName;
 
     [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
 
