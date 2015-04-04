@@ -43,7 +43,7 @@
     UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:types categories:nil];
     [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
 
-    if ([[UIApplication sharedApplication] hasPermissionToScheduleLocalNotifications])
+    if ([[UIApplication sharedApplication] currentUserNotificationSettings].types != UIUserNotificationTypeNone)
     {
         pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsBool:(true)];
     }
@@ -78,7 +78,7 @@
     localNotification.applicationIconBadgeNumber = [[args objectForKey:@"badge"] intValue];
 
     localNotification.fireDate = [NSDate date];
-    notification.soundName = UILocalNotificationDefaultSoundName;
+    localNotification.soundName = UILocalNotificationDefaultSoundName;
 
     [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
 
