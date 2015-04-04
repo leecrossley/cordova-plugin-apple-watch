@@ -22,7 +22,7 @@ Generally speaking, some success and error handlers may be omitted. This is cate
 
 ### init
 
-Initialises the Apple Watch interface, this must be called and the success handler fired before messages can be sent.
+Initialises the Apple Watch two way messaging interface. This must be called and the success handler fired before `sendMessage` can be used.
 
 ```js
 applewatch.init(function successHandler(appGroupId) {}, errorHandler);
@@ -36,6 +36,17 @@ You can supply your own Application Group Id with the optional `appGroupId` argu
 applewatch.init(successHandler, errorHandler, appGroupId);
 ```
 
+### registerNotifications
+
+Requests permission for local notifications if you want to utilise the short-look / long-look notification interface. This must be called and the success handler fired before `sendNotification` will work correctly.
+
+```js
+applewatch.registerNotifications(successHandler, errorHandler);
+```
+
+- successHandler is called with **true** if the permission was accepted
+- errorHandler is called with **false** if the permission was rejected
+
 ### sendMessage
 
 Sends a message object to a specific queue (must be called after successful init).
@@ -48,7 +59,7 @@ applewatch.sendMessage(message, queueName, successHandler, errorHandler);
 
 ### sendNotification
 
-Sends a local notification directly to the apple watch.
+Sends a local notification directly to the apple watch (should be called after successful registerNotifications).
 
 Used to display the apple watch short-look / long-look notification interface, using UILocalNotification. If the user continues to look at the notification, the system transitions quickly from the short-look interface to the long-look interface.
 
