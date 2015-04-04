@@ -11,6 +11,10 @@ AppleWatch.prototype.init = function (onSuccess, onError, appGroupId) {
     }]);
 };
 
+AppleWatch.prototype.registerNotifications = function (onSuccess, onError) {
+    exec(onSuccess, onError, "AppleWatch", "registerNotifications", []);
+};
+
 AppleWatch.prototype.sendMessage = function (message, queueName, onSuccess, onError) {
     if (typeof(message) === "object") {
         message = JSON.stringify(message);
