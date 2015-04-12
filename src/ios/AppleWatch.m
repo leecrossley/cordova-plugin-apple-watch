@@ -73,7 +73,11 @@
 
     UILocalNotification *localNotification = [[UILocalNotification alloc] init];
 
-    localNotification.alertTitle = [args objectForKey:@"title"];
+    if ([localNotification respondsToSelector:@selector(alertTitle)])
+    {
+        localNotification.alertTitle = [args objectForKey:@"title"];
+    }
+
     localNotification.alertBody = [args objectForKey:@"body"];
     localNotification.applicationIconBadgeNumber = [[args objectForKey:@"badge"] intValue];
 
