@@ -89,6 +89,36 @@
     [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_OK] callbackId:command.callbackId];
 }
 
+- (void) sendUserDefaults:(CDVInvokedUrlCommand*)command;
+{
+    CDVPluginResult* pluginResult = nil;
+
+    NSMutableDictionary *args = [command.arguments objectAtIndex:0];
+    NSString *key = [args objectForKey:@"key"];
+    NSString *value = [args objectForKey:@"value"];
+    NSString *appGroupId = [args objectForKey:@"appGroupId"];
+
+    if ([appGroupId length] == 0)
+    {
+        appGroupId = [NSString stringWithFormat:@"group.%@", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleIdentifier"]];
+    }
+
+    NSUserDefaults *userDefaults = [[NSUserDefaults alloc] initWithSuiteName:appGroupId];
+    [userDefaults setObject:value forKey:key];
+    [userDefaults synchronize];
+
+    if ([[userDefaults stringForKey:key] isEqualToString:value])
+    {
+        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
+    }
+    else
+    {
+        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_IO_EXCEPTION];
+    }
+
+    [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+}
+
 - (void) addListener:(CDVInvokedUrlCommand*)command;
 {
     NSMutableDictionary *args = [command.arguments objectAtIndex:0];
