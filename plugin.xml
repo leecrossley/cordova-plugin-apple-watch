@@ -1,10 +1,11 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<plugin id="uk.co.ilee.applewatch" version="0.6.4" xmlns="http://apache.org/cordova/ns/plugins/1.0">
+<plugin id="uk.co.ilee.applewatch" version="0.7.0" xmlns="http://apache.org/cordova/ns/plugins/1.0">
     <name>Apple Watch</name>
     <author>Lee Crossley (http://ilee.co.uk/)</author>
     <description>Cordova / PhoneGap Plugin for the Apple Watch (WatchKit) to allow in memory and lightweight
         json object message passing over named queues from a Cordova app to Apple Watch (and vice versa).</description>
-    <keywords>cordova, apple, watch, watchkit, message, queue, json, extension, darwin, notification</keywords>
+    <keywords>cordova, apple, watch, watchkit, message, queue, json, extension,
+        darwin, notification, glance, user, defaults, nsuserdefaults</keywords>
     <license>MIT</license>
     <engines>
         <engine name="cordova" version=">=3.0.0"/>
