@@ -30,6 +30,16 @@ AppleWatch.prototype.sendNotification = function (onSuccess, onError, payload) {
     exec(onSuccess, onError, "AppleWatch", "sendNotification", [payload]);
 };
 
+AppleWatch.prototype.sendUserDefaults = function (onSuccess, onError, obj, appGroupId) {
+    var key = Object.keys(obj)[0];
+    var payload = {
+        "key": key,
+        "value": obj[key],
+        "appGroupId": appGroupId
+    };
+    exec(onSuccess, onError, "AppleWatch", "sendUserDefaults", [payload]);
+};
+
 AppleWatch.prototype.addListener = function (queueName, onMessage) {
     var wrappedOnMessage = function (message) {
         try { message = JSON.parse(message); } catch (e) {}
