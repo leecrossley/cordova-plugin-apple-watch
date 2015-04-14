@@ -115,6 +115,31 @@ applewatch.sendNotification(successHandler, errorHandler, payload);
 
 NB: This notification will also appear on the iPhone if the app is running in a background mode.
 
+## User defaults
+
+### sendUserDefaults
+
+Allows persistence of user default data (single property key/value object) that can be retrieved by the WatchKit extension.
+
+```js
+
+applewatch.sendUserDefaults(successHandler,
+    errorHandler, { "myKey": "myValue" }, appGroupId);
+```
+
+The app bundleId will be used for identification by default, prefixed by "group." if `appGroupId` is not supplied.
+
+For completeness, here's how you could retrieve the value in your WatchKit extension (swift):
+
+```swift
+let userDefaults = NSUserDefaults(suiteName: "group.com.yourcompany")
+
+var myValue: String? {
+    userDefaults?.synchronize()
+    return userDefaults?.stringForKey("myKey")
+}
+```
+
 ## Basic message passing example
 
 Basic example to send a message "test" to the "myqueue" queue and get handled.
