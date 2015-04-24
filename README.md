@@ -2,6 +2,10 @@
 
 **Cordova / PhoneGap Plugin for the Apple Watch (WatchKit) to allow in memory and lightweight json object message passing over named queues from a Cordova app to Apple Watch (and vice versa).**
 
+#### Live demo
+
+See this plugin working in a live app: http://sprint.social
+
 Simplified overarching diagram:
 
 <img align="center" src="https://raw.githubusercontent.com/leecrossley/cordova-plugin-apple-watch/master/apple-watch-plugin.png">
