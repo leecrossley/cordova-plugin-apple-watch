@@ -1,0 +1,49 @@
+{
+  "name": "cordova-plugin-apple-watch",
+  "version": "0.8.0",
+  "author": "Lee Crossley <leee@hotmail.co.uk> (http://ilee.co.uk/)",
+  "description": "Cordova / PhoneGap Plugin for the Apple Watch (WatchKit) to allow in memory and lightweight json object message passing over named queues from a Cordova app to Apple Watch (and vice versa).",
+  "cordova": {
+    "id": "cordova-plugin-apple-watch",
+    "platforms": [
+      "ios"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/leecrossley/cordova-plugin-apple-watch.git"
+  },
+  "keywords": [
+    "cordova",
+    "apple",
+    "watch",
+    "watchkit",
+    "message",
+    "queue",
+    "json",
+    "extension",
+    "darwin",
+    "notification",
+    "glance",
+    "user",
+    "defaults",
+    "nsuserdefaults",
+    "ecosystem:cordova",
+    "cordova-ios"
+  ],
+  "engines": [
+    {
+      "name": "cordova",
+      "version": ">=3.0.0"
+    },
+    {
+      "name": "apple-ios",
+      "version": ">=8.2.0"
+    }
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/leecrossley/cordova-plugin-apple-watch/issues"
+  },
+  "homepage": "https://github.com/leecrossley/cordova-plugin-apple-watch#readme"
+}
