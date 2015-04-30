@@ -1,6 +1,6 @@
 {
   "name": "cordova-plugin-apple-watch",
-  "version": "0.8.0",
+  "version": "0.8.1",
   "author": "Lee Crossley <leee@hotmail.co.uk> (http://ilee.co.uk/)",
   "description": "Cordova / PhoneGap Plugin for the Apple Watch (WatchKit) to allow in memory and lightweight json object message passing over named queues from a Cordova app to Apple Watch (and vice versa).",
   "cordova": {

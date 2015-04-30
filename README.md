@@ -4,7 +4,7 @@
 
 #### Live demo
 
-See this plugin working in a live app: http://sprint.social
+See this plugin working in a live app: [sprint.social](http://sprint.social)
 
 Simplified overarching diagram:
 
