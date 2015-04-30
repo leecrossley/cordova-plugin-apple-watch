@@ -14,6 +14,14 @@ You will need to write your own WatchKit Extension and WatchKit App with native 
 
 ## Install
 
+#### Latest published version on npm (with Cordova CLI >= 5.0.0)
+
+```
+cordova plugin add cordova-plugin-apple-watch
+```
+
+#### Latest version from GitHub
+
 ```
 cordova plugin add https://github.com/leecrossley/cordova-plugin-apple-watch.git
 ```
