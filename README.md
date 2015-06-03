@@ -2,7 +2,7 @@
 
 **Cordova / PhoneGap Plugin for the Apple Watch (WatchKit) to allow communication between a Cordova app and an Apple WatchKit Extension (and vice versa).**
 
-You will need to write your own WatchKit Extension and WatchKit App with native code. It is not possible to run a Cordova app directly on the Watch, as there is no support for a WebView and your WatchKit code must reside in the WatchKit Extension. This plugin provides a message passing interface between your Cordova iPhone app and the WatchKit Extension / App.
+You will need to write your own WatchKit Extension and WatchKit App with native code. It is not possible to run a Cordova app directly on the Watch, as there is no support for a WebView and your WatchKit code must reside in the WatchKit Extension. This plugin provides various methods of communication between your Cordova iPhone app and the WatchKit Extension / App.
 
 ### Supported methods of communication:
 
