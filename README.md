@@ -1,16 +1,16 @@
 ## Apple Watch Plugin for Apache Cordova
 
-**Cordova / PhoneGap Plugin for the Apple Watch (WatchKit) to allow in memory and lightweight json object message passing over named queues from a Cordova app to Apple Watch (and vice versa).**
+**Cordova / PhoneGap Plugin for the Apple Watch (WatchKit) to allow communication between a Cordova app and an Apple WatchKit Extension (and vice versa).**
 
-#### Live demo
+You will need to write your own WatchKit Extension and WatchKit App with native code. It is not possible to run a Cordova app directly on the Watch, as there is no support for a WebView and your WatchKit code must reside in the WatchKit Extension. This plugin provides a message passing interface between your Cordova iPhone app and the WatchKit Extension / App.
 
-See this plugin working in a live app: [sprint.social](http://sprint.social)
+### Supported methods of communication:
 
-Simplified overarching diagram:
+- **[Message passing](#message-passing)** - in memory and lightweight json object message passing over named queues between a Cordova app and a WatchKit Extension (and vice versa)
+- **[Local notifications](#notifications)** - send a local notification directly from a Cordova app to an Apple Watch
+- **[User defaults](#user-defaults)** - persistence of user data accessible by both a Cordova app and a WatchKit Extension
 
-<img align="center" src="https://raw.githubusercontent.com/leecrossley/cordova-plugin-apple-watch/master/apple-watch-plugin.png">
-
-You will need to write your own WatchKit Extension and WatchKit App with native code. It will not be possible to run a Cordova app directly on the Watch, as there is no support for a WebView and your WatchKit code must reside in the WatchKit Extension. This plugin provides a message passing interface between your Cordova iPhone app and the WatchKit Extension / App.
+*Please note that you cannot force a Cordova app to open from the Apple Watch - this is a limitation set by Apple.*
 
 ## Install
 
@@ -29,6 +29,10 @@ cordova plugin add https://github.com/leecrossley/cordova-plugin-apple-watch.git
 You **do not** need to reference any JavaScript, the Cordova plugin architecture will add a `applewatch` object to your root automatically when you build.
 
 ## Message passing
+
+Simplified overarching diagram (for message passing):
+
+<img align="center" src="https://raw.githubusercontent.com/leecrossley/cordova-plugin-apple-watch/master/apple-watch-plugin.png">
 
 Generally speaking, some success and error handlers may be omitted. This is catered for in the interface function argument orders.
 
@@ -107,9 +111,9 @@ applewatch.registerNotifications(successHandler, errorHandler);
 
 ### sendNotification
 
-Sends a local notification directly to the apple watch (should be called after successful registerNotifications).
+Sends a local notification directly to the Apple Watch (should be called after successful registerNotifications).
 
-Used to display the apple watch short-look / long-look notification interface, using UILocalNotification. If the user continues to look at the notification, the system transitions quickly from the short-look interface to the long-look interface.
+Used to display the Apple Watch short-look / long-look notification interface, using UILocalNotification. If the user continues to look at the notification, the system transitions quickly from the short-look interface to the long-look interface.
 
 ```js
 var payload = {
@@ -169,6 +173,10 @@ applewatch.init(function (appGroupId) {
     applewatch.sendMessage("test", "myqueue");
 });
 ```
+
+## Live demo
+
+See this plugin working in a live app: [sprint.social](http://sprint.social)
 
 ## Platforms
 
