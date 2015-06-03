@@ -1,4 +1,4 @@
-## Apple Watch Plugin for Apache Cordova
+## Apple Watch Plugin for Apache Cordova [![npm version](https://badge.fury.io/js/cordova-plugin-apple-watch.svg)](http://badge.fury.io/js/cordova-plugin-apple-watch)
 
 **Cordova / PhoneGap Plugin for the Apple Watch (WatchKit) to allow communication between a Cordova app and an Apple WatchKit Extension (and vice versa).**
 
