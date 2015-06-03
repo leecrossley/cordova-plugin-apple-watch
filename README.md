@@ -2,13 +2,19 @@
 
 **Cordova / PhoneGap Plugin for the Apple Watch (WatchKit) to allow communication between a Cordova app and an Apple WatchKit Extension (and vice versa).**
 
-You will need to write your own WatchKit Extension and WatchKit App with native code. It is not possible to run a Cordova app directly on the Watch, as there is no support for a WebView and your WatchKit code must reside in the WatchKit Extension. This plugin provides various methods of communication between your Cordova iPhone app and the WatchKit Extension / App.
+Simplified overarching diagram for message passing:
+
+<img align="center" src="https://raw.githubusercontent.com/leecrossley/cordova-plugin-apple-watch/master/apple-watch-plugin.png">
+
+You will need to write your own WatchKit Extension and WatchKit app with native code. It is not possible to run a Cordova app directly on the Watch, as there is no support for a WebView and the WatchKit code must reside in the WatchKit Extension. This plugin provides various methods of communication between a Cordova iPhone app and the WatchKit Extension / app.
+
+For more information on developing your WatchKit Extension / app, please see the [WatchKit Programming Guide](https://developer.apple.com/library/prerelease/ios/documentation/General/Conceptual/WatchKitProgrammingGuide/).
 
 ### Supported methods of communication:
 
-- **[Message passing](#message-passing)** - in memory and lightweight json object message passing over named queues between a Cordova app and a WatchKit Extension (and vice versa)
-- **[Local notifications](#notifications)** - send a local notification directly from a Cordova app to an Apple Watch
-- **[User defaults](#user-defaults)** - persistence of user data accessible by both a Cordova app and a WatchKit Extension
+- **[Message passing](#message-passing)** - in memory and lightweight json object message passing over named queues between a Cordova app and a WatchKit Extension (2-way)
+- **[Local notifications](#notifications)** - sending notifications directly from a Cordova app to an Apple Watch
+- **[User defaults](#user-defaults)** - persisting user data accessible by both a Cordova app and a WatchKit Extension
 
 *Please note that you cannot force a Cordova app to open from the Apple Watch - this is a limitation set by Apple.*
 
@@ -30,11 +36,7 @@ You **do not** need to reference any JavaScript, the Cordova plugin architecture
 
 ## Message passing
 
-Simplified overarching diagram for message passing:
-
-<img align="center" src="https://raw.githubusercontent.com/leecrossley/cordova-plugin-apple-watch/master/apple-watch-plugin.png">
-
-More information regarding the MMWormhole component can be found [here](https://github.com/mutualmobile/MMWormhole).
+Some success and error handlers may be omitted. This is catered for in the interface function argument orders.
 
 ### init
 
@@ -95,6 +97,8 @@ applewatch.purgeQueue(queueName, successHandler, errorHandler);
 ```js
 applewatch.purgeAllQueues(successHandler, errorHandler);
 ```
+
+More information regarding the MMWormhole component used in message passing can be found [here](https://github.com/mutualmobile/MMWormhole).
 
 ## Notifications
 
