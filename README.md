@@ -98,6 +98,67 @@ applewatch.purgeQueue(queueName, successHandler, errorHandler);
 applewatch.purgeAllQueues(successHandler, errorHandler);
 ```
 
+### Message passing examples
+
+Example to send a message "test" to the "myqueue" queue and get handled, where "com.yourcompany" is the App ID and "group.com.yourcompany" is the [App Group](https://developer.apple.com/library/ios/documentation/IDEs/Conceptual/AppDistributionGuide/AddingCapabilities/AddingCapabilities.html#//apple_ref/doc/uid/TP40012582-CH26-SW61).
+
+#### Initialise message passing (Cordova app, js)
+
+```
+applewatch.init(function (appGroupId) {
+    // success, messages may now be sent or listened for
+}, function (err) {
+    // an error occurred
+},
+"group.com.yourcompany");
+```
+
+#### Send a message (Cordova app, js)
+
+```
+// assumes a previously successful init call (above)
+
+applewatch.sendMessage("test", "myqueue");
+```
+
+#### Listen for messages (Cordova app, js)
+
+```
+// assumes a previously successful init call (above)
+
+applewatch.addListener("test", function (message) {
+    // handle your message here
+});
+```
+
+#### Initialise message passing (WatchKit extension, swift)
+
+```
+// assumes your WatchKit extension references the packaged MMWormhole library `libmmwormhole.a`
+
+let wormhole = MMWormhole(applicationGroupIdentifier: "group.com.yourcompany", optionalDirectory: nil)
+```
+
+#### Send a message (WatchKit extension, swift)
+
+```swift
+// assumes wormhole is initialised (above)
+
+wormhole.passMessageObject("titleString", identifier: "messageIdentifier")
+```
+
+#### Listen for messages (WatchKit extension, swift)
+
+```swift
+// assumes wormhole is initialised (above)
+
+wormhole.listenForMessageWithIdentifier("myqueue", listener: { (messageObject) -> Void in
+    if let message: AnyObject = messageObject {
+        // handle your message here
+    }
+})
+```
+
 More information regarding the MMWormhole component used in message passing can be found [here](https://github.com/mutualmobile/MMWormhole).
 
 ## Notifications
@@ -142,7 +203,6 @@ NB: This notification will also appear on the iPhone if the app is running in a 
 Allows persistence of user default data (single property key/value object) that can be retrieved by the WatchKit extension.
 
 ```js
-
 applewatch.sendUserDefaults(successHandler,
     errorHandler, { "myKey": "myValue" }, appGroupId);
 ```
@@ -158,24 +218,6 @@ var myValue: String? {
     userDefaults?.synchronize()
     return userDefaults?.stringForKey("myKey")
 }
-```
-
-## Basic message passing example
-
-Basic example to send a message "test" to the "myqueue" queue and get handled.
-
-This example is iPhone -> iPhone.
-
-```
-applewatch.init(function (appGroupId) {
-    alert(appGroupId);
-
-    applewatch.addListener("myqueue", function(message) {
-        alert("Message received: " + message);
-    });
-
-    applewatch.sendMessage("test", "myqueue");
-});
 ```
 
 ## Live demo
