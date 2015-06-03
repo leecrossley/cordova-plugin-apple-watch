@@ -30,11 +30,11 @@ You **do not** need to reference any JavaScript, the Cordova plugin architecture
 
 ## Message passing
 
-Simplified overarching diagram (for message passing):
+Simplified overarching diagram for message passing:
 
 <img align="center" src="https://raw.githubusercontent.com/leecrossley/cordova-plugin-apple-watch/master/apple-watch-plugin.png">
 
-Generally speaking, some success and error handlers may be omitted. This is catered for in the interface function argument orders.
+More information regarding the MMWormhole component can be found [here](https://github.com/mutualmobile/MMWormhole).
 
 ### init
 
