@@ -104,7 +104,7 @@ Example to send a message "test" to the "myqueue" queue and get handled, where "
 
 #### Initialise message passing (Cordova app, js)
 
-```
+```js
 applewatch.init(function (appGroupId) {
     // success, messages may now be sent or listened for
 }, function (err) {
@@ -115,7 +115,7 @@ applewatch.init(function (appGroupId) {
 
 #### Send a message (Cordova app, js)
 
-```
+```js
 // assumes a previously successful init call (above)
 
 applewatch.sendMessage("test", "myqueue");
@@ -123,7 +123,7 @@ applewatch.sendMessage("test", "myqueue");
 
 #### Listen for messages (Cordova app, js)
 
-```
+```js
 // assumes a previously successful init call (above)
 
 applewatch.addListener("test", function (message) {
@@ -133,7 +133,7 @@ applewatch.addListener("test", function (message) {
 
 #### Initialise message passing (WatchKit extension, swift)
 
-```
+```swift
 // assumes your WatchKit extension references the packaged MMWormhole library `libmmwormhole.a`
 
 let wormhole = MMWormhole(applicationGroupIdentifier: "group.com.yourcompany", optionalDirectory: nil)
