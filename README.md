@@ -183,6 +183,7 @@ Used to display the Apple Watch short-look / long-look notification interface, u
 ```js
 var payload = {
     "title": "Short!",
+    "category": "default",
     "body": "Shown in the long-look interface to provide more detail",
     "badge": 1
 };
@@ -191,6 +192,7 @@ applewatch.sendNotification(successHandler, errorHandler, payload);
 ```
 
 - *title* - shown in the short-look interface as a brief indication of the intent of the notification
+- *category* - defines the notification interface to show and action buttons (if any)
 - *body* - shown in the long-look interface to provide more detail
 - *badge* - app icon badge number
 

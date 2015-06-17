@@ -78,6 +78,11 @@
         localNotification.alertTitle = [args objectForKey:@"title"];
     }
 
+    if ([localNotification respondsToSelector:@selector(category)])
+    {
+        localNotification.category = [args objectForKey:@"category"];
+    }
+
     localNotification.alertBody = [args objectForKey:@"body"];
     localNotification.applicationIconBadgeNumber = [[args objectForKey:@"badge"] intValue];
 
