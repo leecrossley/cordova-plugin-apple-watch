@@ -124,6 +124,25 @@
     [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
 }
 
+- (void) getUserDefaults:(CDVInvokedUrlCommand*)command
+{
+    NSMutableDictionary *args = [command.arguments objectAtIndex:0];
+    NSString *key = [args objectForKey:@"key"];
+    NSString *appGroupId = [args objectForKey:@"appGroupId"];
+
+    if ([appGroupId length] == 0)
+    {
+        appGroupId = [NSString stringWithFormat:@"group.%@", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleIdentifier"]];
+    }
+
+    NSUserDefaults *userDefaults = [[NSUserDefaults alloc] initWithSuiteName:appGroupId];
+    NSString *value = [userDefaults stringForKey:key];
+
+    CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:value];
+
+    [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+}
+
 - (void) addListener:(CDVInvokedUrlCommand*)command;
 {
     NSMutableDictionary *args = [command.arguments objectAtIndex:0];

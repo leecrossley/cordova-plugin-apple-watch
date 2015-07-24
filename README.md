@@ -222,6 +222,16 @@ var myValue: String? {
 }
 ```
 
+### getUserDefaults
+
+Allows retrieval of user default data.
+
+```js
+applewatch.getUserDefaults(successHandler, errorHandler, "myKey", appGroupId);
+```
+
+The app bundleId will be used for identification by default, prefixed by "group." if `appGroupId` is not supplied.
+
 ## Live demo
 
 See this plugin working in a live app: [sprint.social](http://sprint.social)

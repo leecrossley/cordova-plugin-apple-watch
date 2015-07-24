@@ -40,6 +40,14 @@ AppleWatch.prototype.sendUserDefaults = function (onSuccess, onError, obj, appGr
     exec(onSuccess, onError, "AppleWatch", "sendUserDefaults", [payload]);
 };
 
+AppleWatch.prototype.getUserDefaults = function (onSuccess, onError, key, appGroupId) {
+    var payload = {
+        "key": key,
+        "appGroupId": appGroupId
+    };
+    exec(onSuccess, onError, "AppleWatch", "getUserDefaults", [payload]);
+};
+
 AppleWatch.prototype.addListener = function (queueName, onMessage) {
     var wrappedOnMessage = function (message) {
         try { message = JSON.parse(message); } catch (e) {}
