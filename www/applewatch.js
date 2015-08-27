@@ -2,7 +2,7 @@
 var exec = require("cordova/exec");
 
 module.exports = {
-    name"AppleWatch",
+    name:"AppleWatch",
     init:function (onSuccess, onError, appGroupId) {
         exec(onSuccess, onError, "AppleWatch", "init", [{"appGroupId": appGroupId}])
     },
