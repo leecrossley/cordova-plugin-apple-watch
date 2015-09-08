@@ -2,7 +2,6 @@
 var exec = require("cordova/exec");
 
 module.exports = {
-    name:"AppleWatch",
     init:function (onSuccess, onError, appGroupId) {
         exec(onSuccess, onError, "AppleWatch", "init", [{"appGroupId": appGroupId}])
     },
@@ -36,9 +35,9 @@ module.exports = {
     },
     addListener:function (queueName, onMessage) {
         var wrappedOnMessage = function (message) {
-            try { 
-                message = JSON.parse(message); 
-            } 
+            try {
+                message = JSON.parse(message);
+            }
             catch (e) {
                 // TODO:
             }
