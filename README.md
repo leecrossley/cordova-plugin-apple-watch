@@ -134,7 +134,7 @@ applewatch.addListener("test", function (message) {
 #### Initialise message passing (WatchKit extension, swift)
 
 ```swift
-// assumes your WatchKit extension references the packaged MMWormhole library `libmmwormhole.a`
+// assumes your WatchKit extension references Wormhole.h
 
 let wormhole = MMWormhole(applicationGroupIdentifier: "group.com.yourcompany", optionalDirectory: nil)
 ```
