@@ -7,10 +7,12 @@
 #import "Cordova/CDVViewController.h"
 #import "AppleWatch.h"
 #import "MMWormhole.h"
+#import "MMWormholeSession.h"
 
 @interface AppleWatch ()
 
 @property (nonatomic, strong) MMWormhole* wormhole;
+@property (nonatomic, strong) MMWormholeSession *watchConnectivityListeningWormhole;
 
 @end
 
@@ -27,8 +29,10 @@
     {
         appGroupId = [NSString stringWithFormat:@"group.%@", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleIdentifier"]];
     }
-
-    self.wormhole = [[MMWormhole alloc] initWithApplicationGroupIdentifier:appGroupId optionalDirectory:nil];
+    
+    self.watchConnectivityListeningWormhole = [MMWormholeSession sharedListeningSession];
+    
+    self.wormhole = [[MMWormhole alloc] initWithApplicationGroupIdentifier:appGroupId optionalDirectory:nil transitingType:MMWormholeTransitingTypeSessionContext];
 
     pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:appGroupId];
 
@@ -57,12 +61,12 @@
 
 - (void) sendMessage:(CDVInvokedUrlCommand*)command;
 {
+    
     NSMutableDictionary *args = [command.arguments objectAtIndex:0];
-
     NSString *queueName = [args objectForKey:@"queueName"];
     NSString *message = [args objectForKey:@"message"];
 
-    [self.wormhole passMessageObject:message identifier:queueName];
+    [self.wormhole passMessageObject:@{@"selectionString" : message} identifier:queueName];
 
     [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_OK] callbackId:command.callbackId];
 }
@@ -147,13 +151,15 @@
 {
     NSMutableDictionary *args = [command.arguments objectAtIndex:0];
     NSString *queueName = [args objectForKey:@"queueName"];
-
-    [self.wormhole listenForMessageWithIdentifier:queueName listener:^(id message) {
+    
+    [self.watchConnectivityListeningWormhole listenForMessageWithIdentifier:queueName listener:^(id message) {
         CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:message];
         [pluginResult setKeepCallbackAsBool:YES];
 
         [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
     }];
+    
+    [self.watchConnectivityListeningWormhole activateSessionListening];
 }
 
 - (void) removeListener:(CDVInvokedUrlCommand*)command;
@@ -161,7 +167,7 @@
     NSMutableDictionary *args = [command.arguments objectAtIndex:0];
     NSString *queueName = [args objectForKey:@"queueName"];
 
-    [self.wormhole stopListeningForMessageWithIdentifier:queueName];
+    [self.watchConnectivityListeningWormhole stopListeningForMessageWithIdentifier:queueName];
 
     [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_OK] callbackId:command.callbackId];
 }
