@@ -240,6 +240,8 @@ See this plugin working in a live app: [sprint.social](http://sprint.social)
 
 iOS 8.2+ only. However, you can include this plugin and set a lower minimum iOS version. For example setting a deployment target of 8.0 will not cause any errors with the plugin. Similarly, there will be no errors if a user is using the Cordova app without a paired watch.
 
+watchOS 1 & 2.
+
 ## License
 
 [MIT License](http://ilee.mit-license.org)
