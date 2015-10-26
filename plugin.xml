@@ -29,6 +29,15 @@
         <source-file src="src/ios/MMWormholeCoordinatedFileTransiting.m"/>
         <header-file src="src/ios/MMWormholeFileTransiting.h"/>
         <source-file src="src/ios/MMWormholeFileTransiting.m"/>
+	<source-file src="src/ios/MMWormholeSession.h"/>
+	<source-file src="src/ios/MMWormholeSession.m"/>
+	<source-file src="src/ios/MMWormholeSessionContextTransiting.h"/>
+	<source-file src="src/ios/MMWormholeSessionContextTransiting.m"/>
+	<source-file src="src/ios/MMWormholeFileTransiting.h"/>
+	<source-file src="src/ios/MMWormholeFileTransiting.m"/>
+	<source-file src="src/ios/MMWormholeMessageTransiting.h"/>
+	<source-file src="src/ios/MMWormholeMessageTransiting.m"/>
+	<source-file src="src/ios/MMWormholeTransiting.h"/>
         <framework autogen="true" src="Foundation.framework"/>
     </platform>
 </plugin>
