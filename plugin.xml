@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<plugin id="cordova-plugin-apple-watch" version="0.11.1" xmlns="http://apache.org/cordova/ns/plugins/1.0">
+<plugin id="cordova-plugin-apple-watch" version="0.11.2" xmlns="http://apache.org/cordova/ns/plugins/1.0">
     <name>Apple Watch</name>
     <author>Lee Crossley (http://ilee.co.uk/)</author>
     <description>Cordova / PhoneGap Plugin for the Apple Watch (WatchKit) to allow communication
@@ -29,15 +29,16 @@
         <source-file src="src/ios/MMWormholeCoordinatedFileTransiting.m"/>
         <header-file src="src/ios/MMWormholeFileTransiting.h"/>
         <source-file src="src/ios/MMWormholeFileTransiting.m"/>
-	<source-file src="src/ios/MMWormholeSession.h"/>
-	<source-file src="src/ios/MMWormholeSession.m"/>
-	<source-file src="src/ios/MMWormholeSessionContextTransiting.h"/>
-	<source-file src="src/ios/MMWormholeSessionContextTransiting.m"/>
-	<source-file src="src/ios/MMWormholeSessionFileTransiting.h"/>
-	<source-file src="src/ios/MMWormholeSessionFileTransiting.m"/>
-	<source-file src="src/ios/MMWormholeSessionMessageTransiting.h"/>
-	<source-file src="src/ios/MMWormholeSessionMessageTransiting.m"/>
-	<source-file src="src/ios/MMWormholeTransiting.h"/>
-        <framework autogen="true" src="Foundation.framework"/>
+      	<source-file src="src/ios/MMWormholeSession.h"/>
+      	<source-file src="src/ios/MMWormholeSession.m"/>
+      	<source-file src="src/ios/MMWormholeSessionContextTransiting.h"/>
+      	<source-file src="src/ios/MMWormholeSessionContextTransiting.m"/>
+      	<source-file src="src/ios/MMWormholeSessionFileTransiting.h"/>
+      	<source-file src="src/ios/MMWormholeSessionFileTransiting.m"/>
+      	<source-file src="src/ios/MMWormholeSessionMessageTransiting.h"/>
+      	<source-file src="src/ios/MMWormholeSessionMessageTransiting.m"/>
+      	<source-file src="src/ios/MMWormholeTransiting.h"/>
+        <framework src="Foundation.framework"/>
+        <framework src="WatchConnectivity.framework"/>
     </platform>
 </plugin>
