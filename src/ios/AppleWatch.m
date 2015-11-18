@@ -29,9 +29,9 @@
     {
         appGroupId = [NSString stringWithFormat:@"group.%@", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleIdentifier"]];
     }
-    
+
     self.watchConnectivityListeningWormhole = [MMWormholeSession sharedListeningSession];
-    
+
     [self.watchConnectivityListeningWormhole activateSessionListening];
 
     self.wormhole = [[MMWormhole alloc] initWithApplicationGroupIdentifier:appGroupId optionalDirectory:nil transitingType:MMWormholeTransitingTypeSessionContext];
@@ -63,7 +63,11 @@
 
 - (void) sendMessage:(CDVInvokedUrlCommand*)command;
 {
-    
+    if (![WCSession isSupported])
+    {
+        return [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR] callbackId:command.callbackId];
+    }
+
     NSMutableDictionary *args = [command.arguments objectAtIndex:0];
     NSString *queueName = [args objectForKey:@"queueName"];
     NSString *message = [args objectForKey:@"message"];
@@ -153,14 +157,14 @@
 {
     NSMutableDictionary *args = [command.arguments objectAtIndex:0];
     NSString *queueName = [args objectForKey:@"queueName"];
-    
+
     [self.watchConnectivityListeningWormhole listenForMessageWithIdentifier:queueName listener:^(id message) {
         CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:message];
         [pluginResult setKeepCallbackAsBool:YES];
 
         [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
     }];
-    
+
     [self.watchConnectivityListeningWormhole activateSessionListening];
 }
 
