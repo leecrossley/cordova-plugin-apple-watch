@@ -126,7 +126,7 @@ applewatch.sendMessage("test", "myqueue");
 ```js
 // assumes a previously successful init call (above)
 
-applewatch.addListener("test", function (message) {
+applewatch.addListener("myqueue", function (message) {
     // handle your message here
 });
 ```
