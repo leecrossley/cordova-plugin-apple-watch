@@ -60,6 +60,8 @@ Sends a message object to a specific queue (must be called after successful init
 
 Used to send strings or json objects to the Apple Watch extension. Json objects are automatically stringified.
 
+The value of `queueName` must match a value used in a corresponding listener in Swift or Objective-C within the watch app using the method `MMWormhole.listenForMessageWithIdentifier` in order for the watch to receive the sent message.
+
 ```js
 applewatch.sendMessage(message, queueName, successHandler, errorHandler);
 ```
@@ -68,7 +70,9 @@ applewatch.sendMessage(message, queueName, successHandler, errorHandler);
 
 Adds a listener to handle a message object received on a specific queue (must be called after successful init).
 
-Used to handle strings or json objects received from the Apple Watch extension. Json objects are automatically parsed.
+Used to handle strings or json objects received from the Apple Watch extension. Json objects are automatically parsed. 
+
+The value of `queueName` must be used in a corresponding `MMWormhole.passMessageObject` method in Swift or Objective-C within the watch app in order for the Cordova app to receive a message.
 
 ```js
 applewatch.addListener(queueName, messageHandler);
@@ -118,7 +122,7 @@ applewatch.init(function (appGroupId) {
 ```js
 // assumes a previously successful init call (above)
 
-applewatch.sendMessage("test", "myqueue");
+applewatch.sendMessage("test", "from_phone_queue");
 ```
 
 #### Listen for messages (Cordova app, js)
@@ -126,7 +130,7 @@ applewatch.sendMessage("test", "myqueue");
 ```js
 // assumes a previously successful init call (above)
 
-applewatch.addListener("myqueue", function (message) {
+applewatch.addListener("from_watch_queue", function (message) {
     // handle your message here
 });
 ```
@@ -134,9 +138,13 @@ applewatch.addListener("myqueue", function (message) {
 #### Initialise message passing (WatchKit extension, swift)
 
 ```swift
-// assumes your WatchKit extension references Wormhole.h
+// assumes your WatchKit extension references Wormhole.h in a Bridging-Header.h file
 
-let wormhole = MMWormhole(applicationGroupIdentifier: "group.com.yourcompany", optionalDirectory: nil)
+let watchConnectivityListeningWormhole = MMWormholeSession.sharedListeningSession();
+watchConnectivityListeningWormhole.activateSessionListening();
+
+let wormhole = MMWormhole(applicationGroupIdentifier: "group.com.yourcompany", optionalDirectory: nil, transitingType: .SessionContext);
+
 ```
 
 #### Send a message (WatchKit extension, swift)
@@ -144,7 +152,7 @@ let wormhole = MMWormhole(applicationGroupIdentifier: "group.com.yourcompany", o
 ```swift
 // assumes wormhole is initialised (above)
 
-wormhole.passMessageObject("titleString", identifier: "messageIdentifier")
+wormhole.passMessageObject("titleString", identifier: "from_watch_queue")
 ```
 
 #### Listen for messages (WatchKit extension, swift)
@@ -152,7 +160,7 @@ wormhole.passMessageObject("titleString", identifier: "messageIdentifier")
 ```swift
 // assumes wormhole is initialised (above)
 
-wormhole.listenForMessageWithIdentifier("myqueue", listener: { (messageObject) -> Void in
+wormhole.listenForMessageWithIdentifier("from_phone_queue", listener: { (messageObject) -> Void in
     if let message: AnyObject = messageObject {
         // handle your message here
     }
