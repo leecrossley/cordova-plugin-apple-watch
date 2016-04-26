@@ -160,7 +160,7 @@ wormhole.passMessageObject("titleString", identifier: "from_watch_queue")
 ```swift
 // assumes wormhole is initialised (above)
 
-wormhole.listenForMessageWithIdentifier("from_phone_queue", listener: { (messageObject) -> Void in
+watchConnectivityListeningWormhole.listenForMessageWithIdentifier("from_phone_queue", listener: { (messageObject) -> Void in
     if let message: AnyObject = messageObject {
         // handle your message here
     }
