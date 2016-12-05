@@ -152,7 +152,7 @@ let wormhole = MMWormhole(applicationGroupIdentifier: "group.com.yourcompany", o
 ```swift
 // assumes wormhole is initialised (above)
 
-wormhole.passMessageObject("titleString", identifier: "from_watch_queue")
+wormhole.passMessageObject("titleString" as NSCoding?, identifier: "from_watch_queue");
 ```
 
 #### Listen for messages (WatchKit extension, swift)
